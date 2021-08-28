@@ -1,0 +1,724 @@
+;DATA : KARTU TANDA PENDUDUK (KTP)
+;NAMA : CHRISTIAN IMMANUEL GARRY TAMPUBOLON
+;NIM  : 1931423728
+;================================
+CODE_SEG     SEGMENT         ;untuk memberitahukan kepada assembler akan mulai menggunakan code segmen-nya disini
+ORG    100H                ;supaya program di load ke memory, pada offset ke100h(256)byte
+DATA:                       ;DATA(LABEL),huruf besar kecil tidak di bedakan
+JMP     BACKGROUND_ITALY
+A     DB 007,201,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,187,013,010,’$’
+B     DB 007,186,09,09,09,‘PROVINSI BANTEN‘,000,000,000,000,186,013,010,’$’
+C     DB 007,186,09,09,09,‘KABUPATEN TANGERANG‘,000,000,000,000,000,186,013,010,’$’
+D     DB 007,186,000,‘NIK ‘,09,‘: 3514121709940001’,009,000,000,000,000,000,000,000,186,013,010,’$’
+E     DB 007,186,000,‘Nama‘,09,000,000,000,000,000,000,‘:CHRISTIAN IMMANUEL GARRY‘,000,000,000,000,000,186,013,010,’$’
+F     DB 007,186,000,‘Tempat/Tgl Lahir‘,000,000,‘:SURABAYA, 27-10-1996‘,000,000,000,000,186,013,010,’$’
+G     DB 007,186,000,‘Jenis Kelamin‘,00,000,000,000,000,‘:LAKI-LAKI‘,000,000,000,‘gol.Darah:O‘,000,186,013,010,’$’
+H     DB 007,186,000,‘Alamat‘,09,000,‘      :BINTARO‘,009,009,000,000,000,000,000,000,000,186,007,013,010,’$’
+I     DB 007,186,000,000,000,000,‘RT/RW‘,09,000,‘      :004/015‘,009,009,000,000,000,000,000,000,000,186,013,010,’$’
+J     DB 007,186,000,000,000,000,‘kel/Desa‘,09,000,‘      :CISAUK‘,009,009,000,000,000,000,000,000,000,186,013,010,’$’
+K     DB 007,186,000,000,000,000,‘Kecamatan       :PONDOK JAYA‘,009,009,000,000,000,000,000,000,000,186,008,013,010,’$’
+L     DB 007,186,000,‘Agama‘,09,000,000,000,000,000,000,‘:KRISTEN ‘,009,009,000,000,000,000,000,000,000,186,013,010,’$’
+M     DB 007,186,000,‘Status Perkawinan  :BELUM KAWIN‘,009,000,000,000,000,000,000,000,186,013,010,’$’
+N     DB 007,186,000,‘Pekerjaan‘,09,000,000,000,‘    :BEKERJA‘,000,000,000,000,000,186,013,010,’$’
+O     DB 007,186,000,‘Kewarganegaraan‘,000,000,000,‘:WNI‘,009,009,000,000,000,000,000,000,000,186,013,010,’$’
+P     DB 007,186,000,‘Berlaku Hingga‘,000,000,000,000,‘:SEUMUR HIDUP‘,009,000,000,000,000,000,000,000,186,013,010,’$’
+Q     DB 007,200,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,188,013,010,’$’
+x1  DB 186,009,009,009,009,009,000,000,000,000,000,000,000,186,013,010,’$’
+X2  DB 186,009,009,009,009,009,000,000,000,000,000,000,000,186,013,010,’$’
+nama    DB 007,‘ CHRISTIAN IMMANUEL GARRY TAMPUBOLON‘,013,010,’$’
+NIM     DB 007,‘ 1931423728‘,013,010,’$’
+FAK     DB 007,‘ SAINS TEKNOLOGI ‘,013,010,’$’
+Mulai:
+Mov     AX,1300H                 ;service 9, isikan ke AH(reg akumulator)
+Mov     BL,11110000b
+Mov     BH,00                   ;halaman
+Mov     DL,30                   ;posisi x
+Mov     Dh,22                   ;posisi y
+Mov     CX,21                   ;jumlah karakter
+LEA     BP,NAMA                 ;ambil alamat data
+INT     10h
+Mov     BL,11110000b
+Mov     BH,00
+Mov     DL,30
+Mov     Dh,23
+Mov     CX,14
+LEA     BP,NIM
+INT     10h
+Mov     BL,11110000b
+Mov     BH,00
+Mov     DL,30
+Mov     Dh,24
+Mov     CX,16
+LEA     BP,FAK
+INT     10h
+JMP     AKHIRI
+BACKGROUND_ITALY:               ;Modifikasi warna background
+mov ah,06h
+mov cx,0000h
+mov dh,25  ; y
+mov dl,79  ; kordinat x
+mov al,33  ; -y
+mov bh,11001000b             ;merah
+int 10h
+mov ah,06h
+mov cx,0000h
+mov dh,25  ;25
+mov dl,63  ;17
+mov al,33  ;10
+mov bh,11111000b
+int 10h
+mov ah,06h
+mov cx,0000h
+mov dh,25  ;25
+mov dl,17  ;17
+mov al,33  ;10
+mov bh,10101000b
+int 10h
+PELANGI:
+Mov     AX,1300H
+Mov     BL,11111001b ;atribut warna biru cerah
+Mov     BH,00
+Mov     DL,18                                        ;baris
+Mov     Dh,3                                         ;kolom
+Mov     CX,48                                        ;jumlh karkter
+LEA     BP,A                                         ;b0,base pointer
+INT     10h          ;interup video service
+Mov     BL,11111100b ;atribut warna merah cerah
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,3
+Mov     CX,48
+LEA     BP,A
+INT     10h
+Mov     BL,11110111b ;atribut warna abu-abu cerah
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,3
+Mov     CX,48
+LEA     BP,A
+INT     10h
+Mov     BL,11111010b ;atribut warna hijau cerah
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,3
+Mov     CX,48
+LEA     BP,A
+INT     10h
+Mov     BL,11111110b ;atribut warna kuning cerah
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,3
+Mov     CX,48
+LEA     BP,A
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,4
+Mov     CX,29
+LEA     BP,B
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,4
+Mov     CX,29
+LEA     BP,B
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,4
+Mov     CX,29
+LEA     BP,B
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,4
+Mov     CX,29
+LEA     BP,B
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,4
+Mov     CX,29
+LEA     BP,B
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,5
+Mov     CX,29
+LEA     BP,C
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,5
+Mov     CX,29
+LEA     BP,C
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,5
+Mov     CX,29
+LEA     BP,C
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,5
+Mov     CX,29
+LEA     BP,C
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,5
+Mov     CX,29
+LEA     BP,C
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,6
+Mov     CX,14
+LEA     BP,X1
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,7
+Mov     CX,36
+LEA     BP,D
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,7
+Mov     CX,36
+LEA     BP,D
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,7
+Mov     CX,36
+LEA     BP,D
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,7
+Mov     CX,36
+LEA     BP,D
+INT     10h
+Mov     BL,11111011b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,7
+Mov     CX,36
+LEA     BP,D
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,8
+Mov     CX,16
+LEA     BP,X2
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,9
+Mov     CX,40
+LEA     BP,E
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,9
+Mov     CX,40
+LEA     BP,E
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,9
+Mov     CX,40
+LEA     BP,E
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,9
+Mov     CX,40
+LEA     BP,E
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,9
+Mov     CX,40
+LEA     BP,E
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,10
+Mov     CX,47
+LEA     BP,F
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,10
+Mov     CX,47
+LEA     BP,F
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,10
+Mov     CX,47
+LEA     BP,F
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,10
+Mov     CX,47
+LEA     BP,F
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,10
+Mov     CX,47
+LEA     BP,F
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,11
+Mov     CX,47
+LEA     BP,G
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,11
+Mov     CX,47
+LEA     BP,G
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,11
+Mov     CX,47
+LEA     BP,G
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,11
+Mov     CX,47
+LEA     BP,G
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,11
+Mov     CX,47
+LEA     BP,G
+INT     10h
+Mov     BL,11110100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,11
+Mov     CX,47
+LEA     BP,G
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,12
+Mov     CX,36
+LEA     BP,H
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,12
+Mov     CX,36
+LEA     BP,H
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,12
+Mov     CX,36
+LEA     BP,H
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,12
+Mov     CX,36
+LEA     BP,H
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,12
+Mov     CX,36
+LEA     BP,H
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,13
+Mov     CX,36
+LEA     BP,I
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,13
+Mov     CX,36
+LEA     BP,I
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,13
+Mov     CX,36
+LEA     BP,I
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,13
+Mov     CX,36
+LEA     BP,I
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,13
+Mov     CX,36
+LEA     BP,I
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,14
+Mov     CX,39
+LEA     BP,J
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,14
+Mov     CX,39
+LEA     BP,J
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,14
+Mov     CX,39
+LEA     BP,J
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,14
+Mov     CX,39
+LEA     BP,J
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,14
+Mov     CX,39
+LEA     BP,J
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,15
+Mov     CX,38
+LEA     BP,K
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,15
+Mov     CX,38
+LEA     BP,K
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,15
+Mov     CX,38
+LEA     BP,K
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,15
+Mov     CX,38
+LEA     BP,K
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,15
+Mov     CX,38
+LEA     BP,K
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,16
+Mov     CX,31
+LEA     BP,L
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,16
+Mov     CX,31
+LEA     BP,L
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,16
+Mov     CX,31
+LEA     BP,L
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,16
+Mov     CX,31
+LEA     BP,L
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,16
+Mov     CX,31
+LEA     BP,L
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,17
+Mov     CX,42
+LEA     BP,M
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,17
+Mov     CX,42
+LEA     BP,M
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,17
+Mov     CX,42
+LEA     BP,M
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,17
+Mov     CX,42
+LEA     BP,M
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,17
+Mov     CX,42
+LEA     BP,M
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,18
+Mov     CX,45
+LEA     BP,N
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,18
+Mov     CX,45
+LEA     BP,N
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,18
+Mov     CX,45
+LEA     BP,N
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,18
+Mov     CX,45
+LEA     BP,N
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,18
+Mov     CX,45
+LEA     BP,N
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,19
+Mov     CX,35
+LEA     BP,O
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,19
+Mov     CX,35
+LEA     BP,O
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,19
+Mov     CX,35
+LEA     BP,O
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,19
+Mov     CX,35
+LEA     BP,O
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,19
+Mov     CX,35
+LEA     BP,O
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,20
+Mov     CX,41
+LEA     BP,P
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,20
+Mov     CX,41
+LEA     BP,P
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,20
+Mov     CX,41
+LEA     BP,P
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,20
+Mov     CX,41
+LEA     BP,P
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,20
+Mov     CX,41
+LEA     BP,P
+INT     10h
+Mov     BL,11110001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,20
+Mov     CX,41
+LEA     BP,P
+INT     10h
+Mov     BL,11111001b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,21
+Mov     CX,48
+LEA     BP,Q
+INT     10h
+Mov     BL,11111100b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,21
+Mov     CX,48
+LEA     BP,Q
+INT     10h
+Mov     BL,11110111b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,21
+Mov     CX,48
+LEA     BP,Q
+INT     10h
+Mov     BL,11111010b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,21
+Mov     CX,48
+LEA     BP,Q
+INT     10h
+Mov     BL,11111110b
+Mov     BH,00
+Mov     DL,18
+Mov     Dh,21
+Mov     CX,48
+LEA     BP,Q
+INT     10h
+JMP     MULAI
+AKHIRI:
+INT     20H
+CODE_SEG    ENDS
+END     DATA
+;==========================================================================================================================
+;KETERANGAN :
+;       -> JMP perintah untuk melompat ke tujuan (mulai),untuk melewati tempat data program
+;        -> MOV perintah untuk peng-copy-an nilai dari Soyrce operand (sumber) ke Destination operand (tujuan)
+;        -> INT suatu perintah untuk menghasilkan suatu interupsi
+;        -> $(dollar)tanda akhir kalimat yang di cetak
+;        -> 09,10&13 karakter kontrol untuk ,09 Horizontal Tab, 13 carriage return (menuju kolom 0),10 Line Feed                      (pindah baris)
+;        -> DB assembler Directive yang di pakai untuk membentuk teks, DX register berisi 16 bit
+;       -> CX untuk Counte/jumlah data
+;        -> INT     20H interup pengakhir, kembali ke DOS
+;       -> OFFSET merupakan angka 16 bit (dipresentasikan dalam bahasa heksa)
+;       -> LOOP untuk mengulang PEMBACAAN data
+;       -> LEA load effective addres
+;==========================================================================================================================
+
+
+
+; [SOURCE]: C:\emu8086\MySource\KTPPROJECT.asm
